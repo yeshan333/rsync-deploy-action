@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-SSH_PRIVATE_KEY_FILE = './id_rsa'
+SSH_PRIVATE_KEY_FILE='./id_rsa'
 
 echo "Saving private key......"
 
@@ -21,11 +21,11 @@ echo "Done"
 
 chmod 600 $SSH_PRIVATE_KEY_FILE
 
-SSH_COMMAND = "ssh -p $3 -i $SSH_PRIVATE_KEY_FILE $7"
+SSH_COMMAND="ssh -p $3 -i $SSH_PRIVATE_KEY_FILE $7"
 
 start_time=$(date)
 
-echo "Start time of synchronization -> ::set-output name=end_time::$end_time"
+echo "Start time of synchronization -> ::set-output name=end_time::$start_time"
 
 rsync -e "$SSH_COMMAND" $8 -av $5 $1@$2:$6
 

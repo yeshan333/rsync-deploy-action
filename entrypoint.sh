@@ -21,14 +21,14 @@ echo "Done"
 
 chmod 600 $SSH_PRIVATE_KEY_FILE
 
-SSH_COMMAND="ssh -p $3 -i $SSH_PRIVATE_KEY_FILE $7"
+SSH_COMMAND="ssh -p $3 -i $SSH_PRIVATE_KEY_FILE $7 -o StrictHostKeyChecking=no"
 
 start_time=$(date)
 
-echo "Start time of synchronization -> ::set-output name=end_time::$start_time"
+echo "Start time of synchronization ->" ::set-output name=end_time::$start_time
 
 rsync -e "$SSH_COMMAND" $8 -av $5 $1@$2:$6
 
 end_time=$(date)
 
-echo "End time of synchronization -> ::set-output name=end_time::$end_time"
+echo "End time of synchronization ->" ::set-output name=end_time::$end_time

@@ -1,0 +1,46 @@
+name: 'rsync-deploy-action'
+description: 'Synchronize files to the remote server using the SSH private key'
+inputs:
+  ssh_login_username:
+    description: 'SSH login username'
+    required: true
+  remote_server_ip:
+    description: 'remote server ip'
+    required: true
+  ssh_port:
+    description: 'remote server SSH port'
+    required: true
+    default: "22"
+  ssh_private_key:
+    description: 'login user SSH private key'
+    required: true
+  source_path:
+    description: 'The source storage path of the synchronous files'
+    required: true
+  destination_path:
+    description: 'The destination storage path of the synchronous files'
+    required: true
+  ssh_args:
+    description: 'SSH args'
+    required: false
+  rsync_args:
+    description: 'rsync args'
+    required: false
+
+outputs:
+  start_time:
+    description: 'Start time of synchronization'
+  end_time: # id of output
+    description: 'End time of synchronization'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.ssh_login_username }}
+    - ${{ inputs.remote_server_ip }}
+    - ${{ inputs.ssh_port }}
+    - ${{ inputs.ssh_private_key }}
+    - ${{ inputs.source_path }}
+    - ${{ inputs.destination_path }}
+    - ${{ inputs.ssh_args }}
+    - ${{ inputs.rsync_args }}

@@ -47,3 +47,35 @@ Start time of synchronization.
 End time of synchronization.
 
 ## Example usage
+
+links: https://github.com/yeshan333/github-actions-test-repo
+
+```yml
+name: rsync-deploy-action tester
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  hello_world_rsync_deploy:
+    runs-on: ubuntu-latest
+    name: A job to test rsync-deploy-action
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+      - name: Modify files permissions
+        run: |
+          chmod 777 -R ./sync_files
+          ls -l
+      - name: Tester
+        uses: yeshan333/rsync-deploy-action@main
+        id: rsync-deploy-action
+        with:
+          ssh_login_username: ${{ secrets.SSH_LOGIN_USERNAME }}
+          remote_server_ip: ${{ secrets.REMOTE_SERVER_IP }}
+          ssh_port: ${{ secrets.SSH_PORT }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source_path: ./sync_files/*
+          destination_path: ~/shan333.cn
+```

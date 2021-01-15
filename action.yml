@@ -44,3 +44,7 @@ runs:
     - ${{ inputs.destination_path }}
     - ${{ inputs.ssh_args }}
     - ${{ inputs.rsync_args }}
+
+branding:
+  icon: 'file'
+  color: 'green'

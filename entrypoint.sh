@@ -27,14 +27,14 @@ echo =========================================================================
 
 start_time=$(date)
 
-echo "::set-output name=end_time::$start_time"
+echo "{start_time}={start_time}" >> $GITHUB_OUTPUT
 echo "Start time of synchronization  ->  $start_time"
 
 rsync -e "$SSH_COMMAND" $8 -av $5 $1@$2:$6
 
 end_time=$(date)
 
-echo "::set-output name=end_time::$end_time"
+echo "{end_time}={end_time}" >> $GITHUB_OUTPUT
 echo "End time of synchronization  ->  $end_time"
 
 echo =========================================================================
